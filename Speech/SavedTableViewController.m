@@ -633,6 +633,15 @@
 }
 */
 
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SavedEntity *savedEntity = [_fetchedResultsController objectAtIndexPath:indexPath];
+    if (savedEntity.url) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:savedEntity.url]];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 /*
 #pragma mark - Navigation
 
