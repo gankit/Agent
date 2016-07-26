@@ -1,8 +1,10 @@
 # Agent - An app to play with Google's Cloud Speech API
 
-This app allows users to issue voice commands and remember stuff. Commands can start with 'read', 'watch', 'visit' or 'remember'. For eg: 'watch The Big Short', 'read Superintelligence', 'buy iPhone 6S'. You can start recording by hitting the Record button. Or, with headphones plugged in, press the main (center) button to start recording.
+This app allows users to issue voice commands and remember stuff. Start recording by hitting the Record button and/or by pressing the main button with headphones plugged in. 
 
-This app demonstrates how to make streaming gRPC connections to the [Cloud Speech API](https://cloud.google.com/speech/) to recognize speech in recorded audio.
+Commands should start with *read*, *watch*, *visit* or *remember*. For exampe: `watch The Big Short` will fetch the movie **The Big Short** using the OMDB API and save it to the local Code Data database. 
+
+This app is based on [Google's Streaming gRPC sample app][sample-app]. It uses [Cloud Speech API](https://cloud.google.com/speech/) to recognize speech in recorded audio, [Goodreads API][goodreads-api] for Book search, [Yelp API][yelp-api] for Place search and [OMDB API][omdb-api] for Movie search.
 
 ## Prerequisites
 - An API key for the Cloud Speech API (See
@@ -16,7 +18,7 @@ This app demonstrates how to make streaming gRPC connections to the [Cloud Speec
 - Clone this repo and `cd` into this directory.
 - Run `pod install` to download and build Cocoapods dependencies.
 - Open the project by running `open Agent.xcworkspace`.
-- In `Agent/SpeechRecognitionService.m`, replace `YOUR_API_KEY` with the API key obtained above.
+- In `Agent/SpeechRecognitionService.m`, replace `YOUR_GOOGLE_API_KEY` with the API key obtained above.
 - In `Agent/SavedTableViewController.m`, replace `YOUR_GOODREADS_API_KEY` with the API key obtained from Goodreads.
 - In `Agent/SavedTableViewController.m`, replace `YOUR_YELP_API_TOKEN` with the API token obtained from Yelp.
 - Build and run the app.
@@ -35,7 +37,7 @@ Console][cloud-console]
 
 - Clone this repository on GitHub. If you have [`git`][git] installed, you can do this by executing the following command:
 
-$ git clone https://github.com/GoogleCloudPlatform/ios-docs-samples.git
+$ git clone https://github.com/gankit/Agent.git
 
 This will download the repository of samples into the directory
 `ios-docs-samples`.
@@ -52,7 +54,7 @@ This will download the repository of samples into the directory
 
 - Tap the `Record` button. This uses a custom AudioController class to capture audio in an in-memory instance of NSMutableData. When this data reaches a certain size, it is sent to the SpeechRecognitionService class, which streams it to the speech recognition service. Packets are streamed as instances of the RecognizeRequest object, and the first RecognizeRequest object sent also includes configuration information in an instance of InitialRecognizeRequest. As it runs, the AudioController logs the number of samples and average sample magnitude for each packet that it captures.
 
-- Say a command that starts with either 'read', 'watch', 'visit' or 'remember'.
+- Speak a command that starts with either *read*, *watch*, *visit* or *remember*
 
 [vision-zip]: https://github.com/GoogleCloudPlatform/cloud-vision/archive/master.zip
 [getting-started]: https://cloud.google.com/vision/docs/getting-started
@@ -66,3 +68,5 @@ This will download the repository of samples into the directory
 [gRPC Objective-C setup]: https://github.com/grpc/grpc/tree/master/src/objective-c
 [goodreads-api]: https://www.goodreads.com/api
 [yelp-api]: https://www.yelp.com/developers/v3/preview
+[sample-app]: https://github.com/GoogleCloudPlatform/ios-docs-samples/blob/master/speech/Objective-C/Speech-gRPC-Streaming/README.md
+[omdb-api]: http://www.omdbapi.com/
