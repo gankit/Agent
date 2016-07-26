@@ -6,6 +6,7 @@ Commands should start with *read*, *watch*, *visit* or *remember*. For exampe: `
 
 This app is based on [Google's Streaming gRPC sample app][sample-app]. It uses [Cloud Speech API](https://cloud.google.com/speech/) to recognize speech in recorded audio, [Goodreads API][goodreads-api] for Book search, [Yelp API][yelp-api] for Place search and [OMDB API][omdb-api] for Movie search.
 
+<img src='https://github.com/gankit/Agent/blob/master/Agent%20Screenshot.png?raw=true' width='300px'/>
 ## Prerequisites
 - An API key for the Cloud Speech API (See
 [the docs][getting-started] to learn more)
