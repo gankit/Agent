@@ -20,7 +20,7 @@
 #import <RxLibrary/GRXBufferedPipe.h>
 #import <ProtoRPC/ProtoRPC.h>
 
-#define API_KEY @"AIzaSyCfQ4XpgLZmn1_M8SLrAnae59-clyjnmT8"
+#define GOOGLE_API_KEY @"YOUR_GOOGLE_API_KEY"
 #define HOST @"speech.googleapis.com"
 
 @interface SpeechRecognitionService ()
@@ -56,7 +56,7 @@
                                          }];
 
     // authenticate using an API key obtained from the Google Cloud Console
-    _call.requestHeaders[@"X-Goog-Api-Key"] = API_KEY;
+    _call.requestHeaders[@"X-Goog-Api-Key"] = GOOGLE_API_KEY;
     NSLog(@"HEADERS: %@", _call.requestHeaders);
 
     [_call start];
@@ -68,7 +68,7 @@
     recognitionConfig.sampleRate = self.sampleRate;
     recognitionConfig.languageCode = @"en-US";
     recognitionConfig.maxAlternatives = 30;
-      recognitionConfig.speechContext.phrasesArray = [NSMutableArray arrayWithObjects:@"yes", @"no", @"watch", @"read", nil];
+      recognitionConfig.speechContext.phrasesArray = [NSMutableArray arrayWithObjects:@"yes", @"no", @"watch", @"read", @"visit", @"remember", nil];
     StreamingRecognitionConfig *streamingRecognitionConfig = [StreamingRecognitionConfig message];
     streamingRecognitionConfig.config = recognitionConfig;
     streamingRecognitionConfig.singleUtterance = YES;

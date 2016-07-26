@@ -19,7 +19,8 @@
 #import "SavedEntity.h"
 
 #define SAMPLE_RATE 16000.0f
-#define API_KEY @"AIzaSyCfQ4XpgLZmn1_M8SLrAnae59-clyjnmT8"
+#define GOODREADS_API_KEY @"YOUR_GOODREADS_API_KEY"
+#define YELP_TOKEN @"YOUR_YELP_API_TOKEN"
 
 @interface SavedTableViewController () <AudioControllerDelegate, AVSpeechSynthesizerDelegate, NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) UITextView *textView;
@@ -195,7 +196,7 @@
         NSString *queryString = [transcript substringFromIndex:4];
         queryString = [queryString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         // Process book
-        NSString *urlAsString = [NSString stringWithFormat:@"https://www.goodreads.com/search/index.xml?key=KhgAOBLxNTRNPqB7dTKOnQ&q=%@", [[self standardizeString:queryString] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+        NSString *urlAsString = [NSString stringWithFormat:@"https://www.goodreads.com/search/index.xml?key=%@&q=%@", GOODREADS_API_KEY, [[self standardizeString:queryString] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         NSURL *url = [[NSURL alloc] initWithString:urlAsString];
         NSLog(@"%@", urlAsString);
         
@@ -218,7 +219,7 @@
         NSURL *url = [[NSURL alloc] initWithString:urlAsString];
         NSLog(@"%@", urlAsString);
         
-        NSString *token = @"n1bLzokRKBQC-F4ZuUqQsr7z4q39A-eys7m4jYYMTHTEALkhsEuW1Krckb0VoZVdc0k4sWEh9PJC7n1rnQ3JqOG-qoByCuuxHXQOpg5xM7t2gdmlHi2c1k9opbeSV3Yx";
+        NSString *token = YELP_TOKEN;
         
         NSString *authValue = [NSString stringWithFormat:@"Bearer %@",token];
         
@@ -233,32 +234,6 @@
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             NSArray *results = [dataDictionary valueForKey:@"businesses"];
             [self savePlaceToCoreData:results forTranscript:queryString];
-        }] resume];
-    }
-    else if ([transcript rangeOfString:@"buy"].location == 0) {
-        [self playSound:@"music_marimba_chord.aif"];
-        
-        NSString *queryString = [transcript substringFromIndex:3];
-        queryString = [queryString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSString *jsonQueryParam = [[NSString stringWithFormat:@"{\"search\": \"%@\"}", queryString] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        // Process book
-        NSString *urlAsString = [NSString stringWithFormat:@"https://api.semantics3.com/test/v1/products?q=%@",jsonQueryParam];
-        NSURL *url = [[NSURL alloc] initWithString:urlAsString];
-        NSLog(@"%@", urlAsString);
-        
-        NSString *token = @"SEM352E049B0E78E29E007DA115B7907ED40";
-        
-        //Configure your session with common header fields like authorization etc
-        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        sessionConfiguration.HTTPAdditionalHeaders = @{@"api_key": token};
-        
-        NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:sessionConfiguration];
-        
-        [[urlSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            NSLog(@"Error: %@", error);
-            NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-            NSArray *results = [dataDictionary valueForKey:@"results"];
-            [self saveProductToCoreData:results forTranscript:queryString];
         }] resume];
     }
     else if ([transcript rangeOfString:@"remember"].location == 0) {
