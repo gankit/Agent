@@ -56,6 +56,11 @@ This will download the repository of samples into the directory
 
 - Speak a command that starts with either *read*, *watch*, *visit* or *remember*
 
+## Attribution
+- Sounds from [RCP Tones](http://rcptones.com)
+- Icon from [Icon Store](https://iconstore.co/icons/animals-pixel-art/)
+
+
 [vision-zip]: https://github.com/GoogleCloudPlatform/cloud-vision/archive/master.zip
 [getting-started]: https://cloud.google.com/vision/docs/getting-started
 [cloud-console]: https://console.cloud.google.com
