@@ -48,7 +48,6 @@
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     
     BOOL success = [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord
-                                 withOptions:AVAudioSessionCategoryOptionDuckOthers
                                        error:&error];
     if (!success) {
         NSLog(@"AVAudioSession error while setting category due to - %@",error);
