@@ -355,7 +355,7 @@
     book.dateAdded = [NSDate date];
     book.title = [[topBook valueForKey:@"title"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     book.author = [[[topBook valueForKey:@"author"] valueForKey:@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    book.url = [NSString stringWithFormat:@"https://www.goodreads.com/book/show/%@", [topResult valueForKey:@"id"]];
+    book.url = [NSString stringWithFormat:@"https://www.goodreads.com/book/show/%@", [[topBook valueForKey:@"id"] innerText]];
     book.transcript = transcript;
     NSMutableArray *alternatives = [results mutableCopy];
     [alternatives removeObjectAtIndex:0];
