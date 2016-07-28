@@ -2,7 +2,7 @@
 
 This app allows users to issue voice commands and remember stuff. Start recording by hitting the Record button and/or by pressing the main button with headphones plugged in. 
 
-Commands should start with *read*, *watch*, *visit* or *remember*. For exampe: `watch The Big Short` will fetch the movie **The Big Short** using the OMDB API and save it to the local Code Data database. 
+Commands should start with *read*, *watch*, *visit* or *remember*. For example: `watch The Big Short` will fetch the movie **The Big Short** using the OMDB API and save it to the local Code Data database. 
 
 This app is based on [Google's Streaming gRPC sample app][sample-app]. It uses [Cloud Speech API](https://cloud.google.com/speech/) to recognize speech in recorded audio, [Goodreads API][goodreads-api] for Book search, [Yelp API][yelp-api] for Place search and [OMDB API][omdb-api] for Movie search.
 
